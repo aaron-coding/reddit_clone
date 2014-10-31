@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
   
+  has_many :posts, class_name: "User", foreign_key: :author_id
+  
   def self.find_by_credentials(username, password)
     return if username.nil? || password.nil?
     user = User.find_by_username(username)

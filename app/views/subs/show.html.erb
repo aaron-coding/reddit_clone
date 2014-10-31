@@ -1,0 +1,7 @@
+<h1>Sub: <%= @sub.title %></h1>
+
+<h3>Moderator: <%= @sub.moderator.username %></h3>
+
+<p><b>Description</b></p>
+<p><%= @sub.description %></p>
+<p><%= link_to "Edit this sub", edit_sub_url(@sub)%>

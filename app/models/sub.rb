@@ -19,4 +19,6 @@ class Sub < ActiveRecord::Base
     foreign_key: :moderator_id
   )
   
+  has_many :posts
+  
 end

@@ -1,0 +1,16 @@
+<h1>All subs</h1>
+
+<table width="400px">
+  <tr>
+    <th style="text-align: left">Title</th>
+    <th style="text-align: left">Moderator</th>
+    <th style="text-align: left">Description</th>
+  </tr>
+  <% @subs.each do |sub| %>
+  <tr>
+    <td><%= link_to sub.title, sub_url(sub) %></td>
+    <td><%= sub.moderator.username %></td>
+    <td><%= sub.description %></td>
+  </tr>
+  <% end %>
+</table>

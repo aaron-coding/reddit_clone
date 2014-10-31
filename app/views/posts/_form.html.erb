@@ -1,0 +1,38 @@
+<% action = ( post.persisted? ? post_url(post) : posts_url) %>
+<% action_method = ( post.persisted? ? "PATCH" : "POST") %>
+<% button_value = ( post.persisted? ? "Edit post" : "Create post") %>
+
+<form action="<%= action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= action_method %>" >
+  <input type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  <label for="post_sub_id">Pick a Sub-CloneReddit</label>
+  <select name="post[sub_id]" id="post_sub_id">  
+    <option></option>
+    <% subs.each do |sub| %>
+      <option 
+        value="<%= sub.id %>"
+        <%= "selected" if post.sub_id == sub.id %>
+        ><%= sub.title %></option>
+    <% end %>
+  </select><br>
+  
+  <label for="post_title">Title</label>
+  <input type="text" 
+    name="post[title]" 
+    id="post_title" 
+    value="<%= post.title %>"><br>
+  <label for="post_url">Url</label>
+  <input type="text" 
+    name="post[url]" 
+    id="post_url" 
+    value="<%= post.url %>"><br> 
+  <label for="post_content">Content</label>
+  <input type="text" 
+    name="post[content]" 
+    id="post_content" 
+    value="<%= post.content %>"><br>
+  
+  <input type="submit" value="<%= button_value %>">
+</form>

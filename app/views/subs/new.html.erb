@@ -1,11 +1,3 @@
 <h1> Make a Sub </h1>
 
-<form action="<%= subs_url %>" method="POST">
-  <input type="hidden" 
-    name="authenticity_token"
-    value="<%= form_authenticity_token %>">
-    
-    
-  
-  
-</form>
+<%= render "form", sub: @sub %>
