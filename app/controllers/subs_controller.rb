@@ -21,10 +21,10 @@ class SubsController < ApplicationController
       render :new
     end
   end
-  
 
   def show
     @sub = Sub.find(params[:id])
+    @posts = @sub.posts
     render :show
   end
   

@@ -8,7 +8,7 @@
 #  session_token   :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
-#
+
 
 class User < ActiveRecord::Base
   validates :username, :password_digest, :session_token, presence: true
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
   
-  has_many :posts, class_name: "User", foreign_key: :author_id
+  has_many :posts, class_name: "Post", foreign_key: :author_id
   
   def self.find_by_credentials(username, password)
     return if username.nil? || password.nil?

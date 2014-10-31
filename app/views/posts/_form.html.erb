@@ -4,30 +4,32 @@
 
 <form action="<%= action %>" method="POST">
   <input type="hidden" name="_method" value="<%= action_method %>" >
+  
   <input type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
-  <label for="post_sub_id">Pick a Sub-CloneReddit</label>
-  <select name="post[sub_id]" id="post_sub_id">  
-    <option></option>
-    <% subs.each do |sub| %>
-      <option 
-        value="<%= sub.id %>"
-        <%= "selected" if post.sub_id == sub.id %>
-        ><%= sub.title %></option>
-    <% end %>
-  </select><br>
+    
+  <label for="post_sub_id">Pick a Subs</label>
+  <% subs.each do |sub| %>
+    <input type="checkbox" 
+      name="post[sub_ids][]" 
+      id="post_sub_ids_<%= sub.id %>" 
+      value="<%= sub.id %>">
+    <label for="post_sub_ids_<%= sub.id %>"><%= sub.title %></label><br>
+  <% end %>
   
   <label for="post_title">Title</label>
   <input type="text" 
     name="post[title]" 
     id="post_title" 
     value="<%= post.title %>"><br>
+    
   <label for="post_url">Url</label>
   <input type="text" 
     name="post[url]" 
     id="post_url" 
-    value="<%= post.url %>"><br> 
+    value="<%= post.url %>"><br>
+    
   <label for="post_content">Content</label>
   <input type="text" 
     name="post[content]" 

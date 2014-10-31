@@ -19,6 +19,7 @@ class Sub < ActiveRecord::Base
     foreign_key: :moderator_id
   )
   
-  has_many :posts
+  has_many :posts, through: :post_subs
+  has_many :post_subs, dependent: :destroy
   
 end

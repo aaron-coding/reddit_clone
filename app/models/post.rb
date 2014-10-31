@@ -6,17 +6,20 @@
 #  title      :string(255)      not null
 #  url        :string(255)      not null
 #  content    :string(255)
-#  sub_id     :integer          not null
 #  author_id  :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
-
+#
 
 class Post < ActiveRecord::Base
-  validates :title, :url, :author_id, :sub_id, presence: true
+  validates :title, :url, :author, presence: true
+
+  belongs_to(
+    :author,
+    class_name: "User", 
+    foreign_key: :author_id
+  )
   
-  belongs_to :sub
-  belongs_to :author, class_name: "User", foreign_key: :author_id
-  
-  
+  has_many :post_subs, inverse_of: :post, dependent: :destroy
+  has_many :subs, through: :post_subs, source: :sub
 end

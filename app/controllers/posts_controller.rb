@@ -8,12 +8,14 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(post_params)
-    @post.author_id = current_user.id
+    params[:post][:sub_ids].map! { |el| el.to_i }
+    @post = current_user.posts.new(post_params)
+    # fail
     if @post.save
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
+      @subs = Sub.all
       render :new
     end
   end
@@ -36,6 +38,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @subs = Sub.all
     render :show
   end
   
@@ -47,7 +50,7 @@ class PostsController < ApplicationController
   
   private
   def post_params
-    params.require(:post).permit(:title, :url, :content, :sub_id)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
   
   def ensure_author    

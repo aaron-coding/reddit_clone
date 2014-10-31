@@ -1,11 +1,16 @@
-<h2>Sub: <%= @post.sub.title %><h2>
+
 
 <h1><%= @post.title %></h1>
 
 <h2> <%= link_to "Check out this link",  "http://#{@post.url.html_safe}" %></h2>
 <p> <%= @post.content %></p>
 <p> By <%= @post.author.username %> </p>
-
+<p>Subs: </p>
+<ul>
+<% @post.subs.each do |sub| %>
+   <li><%= sub.title %></li>
+<% end %>
+</ul>
 <% if !current_user.nil? && current_user.id == @post.author_id %>
 <%= link_to "Edit this post", edit_post_url(@post) %>
 <%= button_to "Delete this post", post_url(@post), method: :delete %>

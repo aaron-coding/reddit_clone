@@ -5,3 +5,9 @@
 <p><b>Description</b></p>
 <p><%= @sub.description %></p>
 <p><%= link_to "Edit this sub", edit_sub_url(@sub)%>
+
+
+<h2>Sub's Posts</h2>
+<% @posts.each do |post| %>
+  <p> <%= link_to post.title, post_url(post) %></p>
+<% end %>
