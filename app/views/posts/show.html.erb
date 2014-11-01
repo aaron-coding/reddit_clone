@@ -11,15 +11,18 @@
    <li><%= sub.title %></li>
 <% end %>
 </ul>
+
 <% if !current_user.nil? && current_user.id == @post.author_id %>
 <%= link_to "Edit this post", edit_post_url(@post) %>
 <%= button_to "Delete this post", post_url(@post), method: :delete %>
 <% end %>
 <br>
+<p><%= link_to "Make a comment", new_post_comment_url(@post) %></p>
 <h3>Comments: </h3>
-<% @post.comments.each do |comment| %>
+<% @post.top_level_comments.each do |comment| %>
   <p>Username: <%= comment.author.username.capitalize %><br>
-  Comment: <%= comment.content %></p>
+  <%= link_to "Comment: #{comment.content.html_safe}", comment_url(comment) %>
+
+</p>
 <% end %>
 
-<p><%= link_to "Make a comment", new_post_comment_url(@post) %></p>

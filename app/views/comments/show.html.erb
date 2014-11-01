@@ -1,0 +1,25 @@
+<h1> Comment </h1>
+<p><%= @comment.content %></p>
+
+<p>Author: <%= @comment.author.username %></p>
+<form action="<%= comments_url %>" method="POST">
+  <input type="hidden" 
+    name="authenticity_token" 
+    value="<%= form_authenticity_token %>">
+  <input type="hidden" 
+    name="comment[parent_comment_id]" 
+    value="<%= @comment.id %>">
+  <input type="hidden"
+    name="comment[post_id]"
+    value="<%= @comment.post_id %>">
+  <label for="comment_content">Reply</label>
+    <input type="text" name="comment[content]" id="comment_content"><br>
+  <input type="submit" value="Add a reply:"><br>
+</form>
+  
+  <p>Replies:</p>
+  <ul>
+    <% @comment.child_comments.each_with_index do |child_comment, i| %>
+    <li><%= link_to "Reply #{i + 1}", comment_url(child_comment)%></li>
+    <% end %>
+  </ul>
