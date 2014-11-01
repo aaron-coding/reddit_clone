@@ -8,9 +8,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    params[:post][:sub_ids].map! { |el| el.to_i }
     @post = current_user.posts.new(post_params)
-    # fail
     if @post.save
       redirect_to post_url(@post)
     else

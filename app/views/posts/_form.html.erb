@@ -10,11 +10,16 @@
     value="<%= form_authenticity_token %>">
     
   <label for="post_sub_id">Pick a Subs</label>
+  <input type="hidden" 
+    name="post[sub_ids][]"  
+    value="">
   <% subs.each do |sub| %>
     <input type="checkbox" 
       name="post[sub_ids][]" 
       id="post_sub_ids_<%= sub.id %>" 
-      value="<%= sub.id %>">
+      value="<%= sub.id %>"
+      <%= "checked" if post.subs.include?(sub) %>
+      >
     <label for="post_sub_ids_<%= sub.id %>"><%= sub.title %></label><br>
   <% end %>
   

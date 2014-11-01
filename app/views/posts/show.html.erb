@@ -15,3 +15,11 @@
 <%= link_to "Edit this post", edit_post_url(@post) %>
 <%= button_to "Delete this post", post_url(@post), method: :delete %>
 <% end %>
+<br>
+<h3>Comments: </h3>
+<% @post.comments.each do |comment| %>
+  <p>Username: <%= comment.author.username.capitalize %><br>
+  Comment: <%= comment.content %></p>
+<% end %>
+
+<p><%= link_to "Make a comment", new_post_comment_url(@post) %></p>
